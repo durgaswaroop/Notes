@@ -1,4 +1,4 @@
-To upgrade linux kernel to version 4.x, follow these steps:
+	To upgrade linux kernel to version 4.x, follow these steps:
 -- 	Open public-yum-ol7.repo file :: vi /etc/yum.repos.d/public-yum-ol7.repo
 
 -- 	Disable the ol7_UEKR3 repository and enable the ol7_UEKR4 :: 
@@ -24,7 +24,7 @@ To upgrade linux kernel to version 4.x, follow these steps:
 
 --  yum install kernel-uek-4.1.12-37.5.1-el7
 
---	To check the default grub :: vim /etc/default/grub 
+-- 	To check the default grub :: vim /etc/default/grub 
 
 --	Display the menu entries that are defined in the configuration file, for example:
 		# grep '^menuentry' /boot/grub2/grub.cfg
@@ -41,3 +41,7 @@ To upgrade linux kernel to version 4.x, follow these steps:
 --  shutdown -r now
 
 --  Check for the kernel version by running uname -r command.
+
+Useful resources - 	https://docs.oracle.com/cd/E37670_01/E75728/html/section_kfy_f2z_fp2.html
+					http://docs.oracle.com/cd/E52668_01/E54669/html/ol7-grub2_bootloader.html
+					
