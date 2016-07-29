@@ -1,0 +1,43 @@
+To upgrade linux kernel to version 4.x, follow these steps:
+-- 	Open public-yum-ol7.repo file :: vi /etc/yum.repos.d/public-yum-ol7.repo
+
+-- 	Disable the ol7_UEKR3 repository and enable the ol7_UEKR4 :: 
+		[ol7_UEKR3]
+		name=Latest Unbreakable Enterprise Kernel Release 3 for Oracle Linux $releasever ($basearch)
+		baseurl=http://yum.oracle.com/repo/OracleLinux/OL7/UEKR3/$basearch/
+		gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+		gpgcheck=1
+		enabled=0
+
+		[ol7_UEKR4]
+		name=Latest Unbreakable Enterprise Kernel Release 4 for Oracle Linux $releasever ($basearch)
+		baseurl=http://yum.oracle.com/repo/OracleLinux/OL7/UEKR4/$basearch/
+		gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+		gpgcheck=1
+		enabled=1
+
+--  Run yum update
+
+--	If the following error appears "groupadd: Can't get unique system GID (no more available GIDs)", open /etc/login.defs file and change the values for the following parameteres and run the yum update command again.
+		SYS_GID_MIN               2000
+		SYS_GID_MAX               9000
+
+--  yum install kernel-uek-4.1.12-37.5.1-el7
+
+--	To check the default grub :: vim /etc/default/grub 
+
+--	Display the menu entries that are defined in the configuration file, for example:
+		# grep '^menuentry' /boot/grub2/grub.cfg
+		menuentry 'Oracle Linux Everything, with Linux 3.10.0-123.el7.x86_64' ... {
+		menuentry 'Oracle Linux Everything, with Linux 3.8.13-35.2.1.el7uek.x86_64' ... {
+		menuentry 'Oracle Linux Everything, with Linux 0-rescue-052e316f566e4a45a3391cff21b4174b' ... {
+
+	In this example for a BIOS-based system, the configuration file is /boot/grub2/grub.cfg, which contains menu entries 0, 1, and 2 that correspond to the RHCK, UEK, and the rescue kernel respectively.
+
+--  Enter the following commands to make the UEK (entry 1) the default boot kernel:	
+	grub2-set-default # :: # - give the kernel number which you want to set. The index starts from 0.
+	grub2-mkconfig -o /boot/grub2/grub.cfg 
+
+--  shutdown -r now
+
+--  Check for the kernel version by running uname -r command.
