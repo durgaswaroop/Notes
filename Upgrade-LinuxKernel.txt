@@ -22,17 +22,20 @@
 		SYS_GID_MIN               2000
 		SYS_GID_MAX               9000
 
---  yum install kernel-uek-4.1.12-37.5.1-el7
 
--- 	To check the default grub :: vim /etc/default/grub 
+--  yum search --show-duplicates kernel-uek
 
---	Display the menu entries that are defined in the configuration file, for example:
+--  yum install kernel-uek-4.1.12-37.6.1.el7uek.x86_64
+
+--  To check the default grub :: vim /etc/default/grub 
+
+--  Display the menu entries that are defined in the configuration file, for example:
 		# grep '^menuentry' /boot/grub2/grub.cfg
 		menuentry 'Oracle Linux Everything, with Linux 3.10.0-123.el7.x86_64' ... {
 		menuentry 'Oracle Linux Everything, with Linux 3.8.13-35.2.1.el7uek.x86_64' ... {
 		menuentry 'Oracle Linux Everything, with Linux 0-rescue-052e316f566e4a45a3391cff21b4174b' ... {
 
-	In this example for a BIOS-based system, the configuration file is /boot/grub2/grub.cfg, which contains menu entries 0, 1, and 2 that correspond to the RHCK, UEK, and the rescue kernel respectively.
+    In this example for a BIOS-based system, the configuration file is /boot/grub2/grub.cfg, which contains menu entries 0, 1, and 2 that correspond to the RHCK, UEK, and the rescue kernel respectively.
 
 --  Enter the following commands to make the UEK (entry 1) the default boot kernel:	
 	grub2-set-default # :: # - give the kernel number which you want to set. The index starts from 0.
