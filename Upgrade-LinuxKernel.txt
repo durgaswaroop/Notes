@@ -18,9 +18,16 @@
 
 --  Run yum update
 
---	If the following error appears "groupadd: Can't get unique system GID (no more available GIDs)", open /etc/login.defs file and change the values for the following parameteres and run the yum update command again.
-		SYS_GID_MIN               2000
-		SYS_GID_MAX               9000
+-- Possible Errors:
+
+1. Error : Requested URL returned Error : 404. Time out .. Operation too slow.
+Less than 1000 byts/sec transferred in the last 30 secs
+Then : Run 'yum clean all' and run update again
+
+2. If the following error appears "groupadd: Can't get unique system GID (no more available GIDs)", open /etc/login.defs file and change the values for the following parameteres and run the yum update command again.
+	SYS_GID_MIN               2000
+	SYS_GID_MAX               9000
+
 
 
 --  yum search --show-duplicates kernel-uek
